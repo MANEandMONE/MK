@@ -31,7 +31,6 @@
             font-size : 20px;
         }
         body{
-            {% comment %} background-image:url("{% static 'mg/맥주배경.jpg' %}"); {% endcomment %}
             background-size:100% 200%;
         }
     </style>
@@ -47,42 +46,22 @@
                 {% csrf_token %}
                 <br>
                 
-                {% comment %} 아이디 :
-                <input type="text" name="name"><br><br>
-
-                맥주 :
-                <select name="beer">
-                    {% for tmp in beer_list %}
-                        <option value='{{tmp}}'>{{tmp}}</option>
-                    {% endfor %}
-                </select><br><br> {% endcomment %}
                 취향 :
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="food">음식
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="inform">안내시설
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="nature">자연경관
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="culture">문화유산
+                    <br><br>
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="traffic">교통
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="sleep">숙박
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="shopping">쇼핑
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="kind">관광종사자 친절도
+                    <br><br>
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="conv">편의 시설
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="active">액티비티
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="cost">물가
                     <input onclick="CountChecked(this)" type="checkbox" name="detail" value="busy">혼잡도
-                {% comment %} <select name="detail">
-                    <option value="nature">자연경관</option>
-                    <option value="culture">문화유산</option>
-                    <option value="traffic">교통</option>
-                    <option value="sleep">숙박시설</option>
-                    <option value="food">음식</option>
-                    <option value="shopping">쇼핑</option>
-                    <option value="inform">안내시설</option>
-                    <option value="conv">편의시설</option>
-                    <option value="kind">관광종사자 친절도</option>
-                    <option value="active">체험프로그램</option>
-                    <option value="cost">물가</option>
-                    <option value="busy">혼잡도</option>
-                </select><br><br> {% endcomment %}
+                    <br><br>
                 <input class="btn btn-success" type="submit" value="Pick!"> 
             </form>
         </div>

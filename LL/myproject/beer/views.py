@@ -164,79 +164,23 @@ def index(request):
 
 def ver1(request):
     beer_list = pd.read_csv('도시이름.csv', encoding='utf-8', index_col=0)
-    #beer_year = pd.read_csv('맥주_연도별평점.csv', encoding='utf-8', index_col=0)
     ratings = pd.read_csv('총 평점.csv', encoding='utf-8', index_col=0)
     cluster_3 = pd.read_csv('대표군집클러스터링.csv', encoding='utf-8', index_col=0)
     cluster_all = pd.read_csv('전체도시클러스터링.csv', encoding='utf-8', index_col=0)
-    #beer_data = pd.read_csv('맥주_cbf_data.csv', encoding='utf-8', index_col=0)
     beer_list = beer_list['city']
-    #cluster_3 = cluster_3.values
 
     if request.method == 'POST':
         beer_name = request.POST.get('beer', '')
-        #     detail = request.POST.get('detail', '')
-        #
+
         df = recomm_feature(ratings)
 
         result = recomm_beer(df, beer_name)
         result = result.index.tolist()
 
-        # 클러스터링 결과
-        # tmp_cluster = []
-        # category = []
-        # food = []
-        # for i in range(3):
-        #     target = cluster_all[cluster_all['city'] == result[i]]
-        #     target = target[[
-        #         'food', 'sleep', 'traffic', 'culture', 'nature', 'avg', 'busy',
-        #         'cost', 'active', 'kind', 'conv', 'inform', 'shopping'
-        #     ]]
-        #     target = target.values[0]
-        #     tmp_cluster.append(target)
-
-        # try:
-        #     category.append(beer_data[beer_data['맥주이름'] == result[i]]['Main Category'].values[0])
-        #     food.append(beer_data[beer_data['맥주이름'] ==result[i]]['Paring Food'].values[0])
-
-        # except:
-        #     category.append('수집되지 않았습니다.')
-        #     food.append('수집되지 않았습니다.')
-
-        # 연도별 평점 결과
-        #     tmp_year = []
-        #     tmp_ratings = []
-        #     for i in range(3):
-        #         target = beer_year[beer_year['맥주'] == result[i]]
-        #         target_year = target['년'].tolist()
-        #         target_rating = target['평점'].tolist()
-        #         tmp_year.append(target_year)
-        #         tmp_ratings.append(target_rating)
-
-        #     # 넘겨줄 데이터 Json 변환
-        #     targetdict = {
-        #         'beer_name': result,
-        #         'beer_cluster1': tmp_cluster[0].tolist(),
-        #         'beer_cluster2': tmp_cluster[1].tolist(),
-        #         'beer_cluster3': tmp_cluster[2].tolist(),
-        #         'cluster1': cluster_3[0].tolist(),
-        #         'cluster2': cluster_3[1].tolist(),
-        #         'cluster3': cluster_3[2].tolist(),
-        #         # 'tmp_year': tmp_year,
-        #         'tmp_ratings': tmp_ratings
-        #     }
-
-        #     targetJson = json.dumps(targetdict)
-
-        return render(
-            request,
-            'beer/ver1_result.html',
-            {
-                'result': result,
-                'beer_list': beer_list,
-                # 'targetJson': targetJson,
-                # 'category': category,
-                # 'food': food
-            })
+        return render(request, 'beer/ver1_result.html', {
+            'result': result,
+            'beer_list': beer_list,
+        })
     else:
         return render(request, 'beer/ver1.html', {'beer_list': beer_list})
 
@@ -250,13 +194,9 @@ def ver1(request):
 #     return render(response, 'beer/vr0.html')
 
 
-# food inform nature culture traffic sleep shopping kind conv active cost busy
 def ver3(request):
 
     beer_list = pd.read_csv('도시이름.csv', encoding='utf-8', index_col=0)
-    # ratings = pd.read_csv('총 평점.csv', encoding='utf-8', index_col=0)
-    # cluster_3 = pd.read_csv('대표군집클러스터링.csv', encoding='utf-8', index_col=0)
-    # cluster_all = pd.read_csv('전체도시클러스터링.csv', encoding='utf-8', index_col=0)
     beer_list = beer_list['city']
     result = []
     cst0_list = [
@@ -300,7 +240,6 @@ def ver3(request):
     ]
 
     if request.method == 'POST':
-        # beer_name = request.POST.get('beer', '')
         detail = request.POST.get('detail', '')
 
         if detail in ['food', 'inform', 'nature']:  #0
