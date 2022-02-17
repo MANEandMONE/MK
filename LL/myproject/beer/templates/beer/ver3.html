@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>Ver2)Recommendation</title>
+    <style>
+        h1 { text-align: center; color: white;}
+        img {
+            display: block; margin: 0px auto;
+            width:40%;
+        }
+        select {
+            width: 200px;
+            padding: .5em .5em;
+            border: 1px solid #999;
+            font-family: inherit;
+            background: url('arrow.jpg') no-repeat 95% 50%;
+            border-radius: 0px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        input[type=text] {
+            width : 190px;
+            height : 30px;
+            font-size : 20px;
+        }
+        body{
+            {% comment %} background-image:url("{% static 'mg/맥주배경.jpg' %}"); {% endcomment %}
+            background-size:100% 200%;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color:#0d47a1;">
+    <h1>좋아하는 테마를 선택해주세요.</h1>
+</div>
+    <div id = 'contents' style="text-align:center;">
+        <img id="mg1" src="static/mg/ver3.png">
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <br>
+                
+                {% comment %} 아이디 :
+                <input type="text" name="name"><br><br>
+
+                맥주 :
+                <select name="beer">
+                    {% for tmp in beer_list %}
+                        <option value='{{tmp}}'>{{tmp}}</option>
+                    {% endfor %}
+                </select><br><br> {% endcomment %}
+                취향 :
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="food">음식
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="inform">안내시설
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="nature">자연경관
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="culture">문화유산
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="traffic">교통
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="sleep">숙박
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="shopping">쇼핑
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="kind">관광종사자 친절도
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="conv">편의 시설
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="active">액티비티
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="cost">물가
+                    <input onclick="CountChecked(this)" type="checkbox" name="detail" value="busy">혼잡도
+                {% comment %} <select name="detail">
+                    <option value="nature">자연경관</option>
+                    <option value="culture">문화유산</option>
+                    <option value="traffic">교통</option>
+                    <option value="sleep">숙박시설</option>
+                    <option value="food">음식</option>
+                    <option value="shopping">쇼핑</option>
+                    <option value="inform">안내시설</option>
+                    <option value="conv">편의시설</option>
+                    <option value="kind">관광종사자 친절도</option>
+                    <option value="active">체험프로그램</option>
+                    <option value="cost">물가</option>
+                    <option value="busy">혼잡도</option>
+                </select><br><br> {% endcomment %}
+                <input class="btn btn-success" type="submit" value="Pick!"> 
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var maxCount = 3;								// 카운트 최대값은 3
+        var count = 0;   								// 카운트, 0으로 초기화 설정
+        
+        function CountChecked(field){ 					// field객체를 인자로 하는 CountChecked 함수 정의
+            if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
+                count += 1;								// count 1 증가
+            }
+            else {										// 아니라면 (field의 속성이 checked가 아니라면)
+                count -= 1;								// count 1 감소
+            }
+            
+            if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
+                alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
+            field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
+            count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
+            }
+        }
+        </script>
+</body>
+</html>
