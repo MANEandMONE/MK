@@ -13,12 +13,10 @@ import sklearn as sk
 import warnings
 # 직렬화
 from rest_framework import viewsets
-from .serializers import ProductSerializer
-from .models import Product
-from pydantic import BaseModel
 import csv
 import random
 #from .models import beer
+
 # def register(request):   #회원가입 페이지를 보여주기 위한 함수
 #     if request.method == "GET" :
 #         return render(request, 'beer/register.html') #register를 요청받으면 register.html 로 응답
@@ -39,26 +37,7 @@ import random
 #         return render(request, 'beer/register.html', res_data) #register를 요청받으면 register.html 로 응답.
 warnings.filterwarnings('ignore')
 
-# def preprocessing(df, n):
-#     df = pd.read_csv('총 평점.csv', encoding='utf-8', index_col=0)
-
-#     df = df[['장소', '아이디', '평점']]
-
-#     min_id = df['아이디'].value_counts() >= n
-#     min_id = min_id[min_id].index.to_list()
-#     df = df[df['아이디'].isin(min_id)]
-
-#     min_place = df['장소'].value_counts() >= n
-#     min_place = min_place[min_place].index.to_list()
-#     df = df[df['장소'].isin(min_place)]
-
-#     return df
-
-
 # Viewset API Set
-class ProductView(viewsets.ModelViewSet):
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
 
 
 # 우리가 예측한 평점과 실제 평점간의 차이를 MSE로 계산
@@ -242,43 +221,43 @@ def ver3(request):
     if request.method == 'POST':
         detail = request.POST.get('detail', '')
 
-        if detail in ['food', 'inform', 'nature']:  #0
-            result = cst0_list
-            random.shuffle(result)
-
-        elif detail in ['food', 'inform', 'culture']:  #1
-            result = cst1_list
-            random.shuffle(result)
-
-        elif detail in ['food', 'inform', 'traffic']:  #2
+        if detail in ['food', 'walk', 'nature']:  #0
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'sleep']:  #3
+        elif detail in ['food', 'walk', 'culture']:  #1
+            result = cst1_list
+            random.shuffle(result)
+
+        elif detail in ['food', 'walk', 'date']:  #2
+            result = cst2_list
+            random.shuffle(result)
+
+        elif detail in ['food', 'walk', 'sleep']:  #3
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'shopping']:  #4
+        elif detail in ['food', 'walk', 'drive']:  #4
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'kind']:  #5
+        elif detail in ['food', 'walk', 'night']:  #5
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'conv']:  #0
+        elif detail in ['food', 'walk', 'fori']:  #0
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'active']:  #1
+        elif detail in ['food', 'walk', 'sns']:  #1
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'cost']:  #2
+        elif detail in ['food', 'walk', 'family']:  #2
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'inform', 'busy']:  #3
+        elif detail in ['food', 'walk', 'view']:  #3
             result = cst3_list
             random.shuffle(result)
 
@@ -286,7 +265,7 @@ def ver3(request):
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'traffic']:  #5
+        elif detail in ['food', 'nature', 'date']:  #5
             result = cst5_list
             random.shuffle(result)
 
@@ -294,31 +273,31 @@ def ver3(request):
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'shopping']:  #1
+        elif detail in ['food', 'nature', 'drive']:  #1
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'kind']:  #2
+        elif detail in ['food', 'nature', 'night']:  #2
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'conv']:  #3
+        elif detail in ['food', 'nature', 'fori']:  #3
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'active']:  #4
+        elif detail in ['food', 'nature', 'sns']:  #4
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'cost']:  #5
+        elif detail in ['food', 'nature', 'family']:  #5
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'busy']:  #0
+        elif detail in ['food', 'nature', 'view']:  #0
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'traffic']:  #1
+        elif detail in ['food', 'culture', 'date']:  #1
             result = cst0_list
             random.shuffle(result)
 
@@ -326,322 +305,322 @@ def ver3(request):
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'shopping']:  #3
+        elif detail in ['food', 'culture', 'drive']:  #3
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'kind']:  #4
+        elif detail in ['food', 'culture', 'night']:  #4
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'conv']:  #5
+        elif detail in ['food', 'culture', 'fori']:  #5
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'active']:  #0
+        elif detail in ['food', 'culture', 'sns']:  #0
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'cost']:  #1
+        elif detail in ['food', 'culture', 'family']:  #1
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'busy']:  #2
+        elif detail in ['food', 'culture', 'view']:  #2
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'sleep']:  #3
+        elif detail in ['food', 'date', 'sleep']:  #3
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'shopping']:  #4
+        elif detail in ['food', 'date', 'drive']:  #4
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'kind']:  #5
+        elif detail in ['food', 'date', 'night']:  #5
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'conv']:  #0
+        elif detail in ['food', 'date', 'fori']:  #0
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'active']:  #1
+        elif detail in ['food', 'date', 'sns']:  #1
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'cost']:  #2
+        elif detail in ['food', 'date', 'family']:  #2
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'traffic', 'busy']:  #3
+        elif detail in ['food', 'date', 'view']:  #3
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'shopping']:  #4
+        elif detail in ['food', 'sleep', 'drive']:  #4
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'kind']:  #5
+        elif detail in ['food', 'sleep', 'night']:  #5
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'conv']:  #0
+        elif detail in ['food', 'sleep', 'fori']:  #0
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'active']:  #1
+        elif detail in ['food', 'sleep', 'sns']:  #1
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'cost']:  #2
+        elif detail in ['food', 'sleep', 'family']:  #2
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'busy']:  #3
+        elif detail in ['food', 'sleep', 'view']:  #3
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'shopping', 'kind']:  #4
+        elif detail in ['food', 'drive', 'night']:  #4
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'shopping', 'conv']:  #5
+        elif detail in ['food', 'drive', 'fori']:  #5
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'shopping', 'active']:
+        elif detail in ['food', 'drive', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'shopping', 'cost']:
+        elif detail in ['food', 'drive', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'shopping', 'busy']:
+        elif detail in ['food', 'drive', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'kind', 'conv']:
+        elif detail in ['food', 'night', 'fori']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'kind', 'active']:
+        elif detail in ['food', 'night', 'sns']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'kind', 'cost']:
+        elif detail in ['food', 'night', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'kind', 'busy']:
+        elif detail in ['food', 'night', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'conv', 'active']:
+        elif detail in ['food', 'fori', 'sns']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'conv', 'cosy']:
+        elif detail in ['food', 'fori', 'cosy']:
             result = cst2_list
             random.shuffle(result)
-        elif detail in ['food', 'conv', 'busy']:
+        elif detail in ['food', 'fori', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'active', 'cost']:
+        elif detail in ['food', 'sns', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'active', 'busy']:
+        elif detail in ['food', 'sns', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'cost', 'busy']:
+        elif detail in ['food', 'family', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'culture']:
+        elif detail in ['walk', 'nature', 'culture']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'traffic']:
+        elif detail in ['walk', 'nature', 'date']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'sleep']:
+        elif detail in ['walk', 'nature', 'sleep']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'shopping']:
+        elif detail in ['walk', 'nature', 'drive']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'kind']:
+        elif detail in ['walk', 'nature', 'night']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'conv']:
+        elif detail in ['walk', 'nature', 'fori']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'active']:
+        elif detail in ['walk', 'nature', 'sns']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'cost']:
+        elif detail in ['walk', 'nature', 'family']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'nature', 'busy']:
+        elif detail in ['walk', 'nature', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'traffic']:
+        elif detail in ['walk', 'culture', 'date']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'sleep']:
+        elif detail in ['walk', 'culture', 'sleep']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'shopping']:
+        elif detail in ['walk', 'culture', 'drive']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'kind']:
+        elif detail in ['walk', 'culture', 'night']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'conv']:
+        elif detail in ['walk', 'culture', 'fori']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'active']:
+        elif detail in ['walk', 'culture', 'sns']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'cost']:
+        elif detail in ['walk', 'culture', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'culture', 'busy']:
+        elif detail in ['walk', 'culture', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'sleep']:
+        elif detail in ['walk', 'date', 'sleep']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'shopping']:
+        elif detail in ['walk', 'date', 'drive']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'kind']:
+        elif detail in ['walk', 'date', 'night']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'conv']:
+        elif detail in ['walk', 'date', 'fori']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'active']:
+        elif detail in ['walk', 'date', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'cost']:
+        elif detail in ['walk', 'date', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'traffic', 'busy']:
+        elif detail in ['walk', 'date', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'sleep', 'shopping']:
+        elif detail in ['walk', 'sleep', 'drive']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'sleep', 'kind']:
+        elif detail in ['walk', 'sleep', 'night']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'sleep', 'conv']:
+        elif detail in ['walk', 'sleep', 'fori']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'sleep', 'active']:
+        elif detail in ['walk', 'sleep', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'sleep', 'cost']:
+        elif detail in ['walk', 'sleep', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'sleep', 'busy']:
+        elif detail in ['walk', 'sleep', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'shopping', 'kind']:
+        elif detail in ['walk', 'drive', 'night']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'shopping', 'conv']:
+        elif detail in ['walk', 'drive', 'fori']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'shopping', 'active']:
+        elif detail in ['walk', 'drive', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'shopping', 'cost']:
+        elif detail in ['walk', 'drive', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'shopping', 'busy']:
+        elif detail in ['walk', 'drive', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'kind', 'conv']:
+        elif detail in ['walk', 'night', 'fori']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'kind', 'active']:
+        elif detail in ['walk', 'night', 'sns']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'kind', 'cost']:
+        elif detail in ['walk', 'night', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'kind', 'busy']:
+        elif detail in ['walk', 'night', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'conv', 'active']:
+        elif detail in ['walk', 'fori', 'sns']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'conv', 'cost']:
+        elif detail in ['walk', 'fori', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'conv', 'busy']:
+        elif detail in ['walk', 'fori', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'active', 'cost']:
+        elif detail in ['walk', 'sns', 'family']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'active', 'busy']:
+        elif detail in ['walk', 'sns', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['inform', 'cost', 'busy']:
+        elif detail in ['walk', 'family', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'traffic']:
+        elif detail in ['nature', 'culture', 'date']:
             result = cst0_list
             random.shuffle(result)
 
@@ -649,461 +628,461 @@ def ver3(request):
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'shopping']:
+        elif detail in ['nature', 'culture', 'drive']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'kind']:
+        elif detail in ['nature', 'culture', 'night']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'conv']:
+        elif detail in ['nature', 'culture', 'fori']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'active']:
+        elif detail in ['nature', 'culture', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'cost']:
+        elif detail in ['nature', 'culture', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'culture', 'busy']:
+        elif detail in ['nature', 'culture', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'traffic', 'sleep']:
+        elif detail in ['nature', 'date', 'sleep']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'traffic', 'shopping']:
+        elif detail in ['nature', 'date', 'drive']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'traffic', 'kind']:
+        elif detail in ['nature', 'date', 'night']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'traffic', 'conv']:
+        elif detail in ['nature', 'date', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'traffic', 'active']:
+        elif detail in ['nature', 'date', 'sns']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'traffic', 'cost']:
+        elif detail in ['nature', 'date', 'family']:
             result = cst1_list
             random.shuffle(result)
-        elif detail in ['nature', 'traffic', 'busy']:
+        elif detail in ['nature', 'date', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'sleep', 'shopping']:
+        elif detail in ['nature', 'sleep', 'drive']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'sleep', 'kind']:
+        elif detail in ['nature', 'sleep', 'night']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'sleep', 'conv']:
+        elif detail in ['nature', 'sleep', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'sleep', 'active']:
+        elif detail in ['nature', 'sleep', 'sns']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'sleep', 'cost']:
+        elif detail in ['nature', 'sleep', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'sleep', 'busy']:
+        elif detail in ['nature', 'sleep', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'shopping', 'kind']:
+        elif detail in ['nature', 'drive', 'night']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'shopping', 'conv']:
+        elif detail in ['nature', 'drive', 'fori']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'shopping', 'active']:
+        elif detail in ['nature', 'drive', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'shopping', 'cost']:
+        elif detail in ['nature', 'drive', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'shopping', 'busy']:
+        elif detail in ['nature', 'drive', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'kind', 'conv']:
+        elif detail in ['nature', 'night', 'fori']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'kind', 'active']:
+        elif detail in ['nature', 'night', 'sns']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'kind', 'cost']:
+        elif detail in ['nature', 'night', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'kind', 'busy']:
+        elif detail in ['nature', 'night', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'conv', 'active']:
+        elif detail in ['nature', 'fori', 'sns']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'conv', 'cost']:
+        elif detail in ['nature', 'fori', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'conv', 'busy']:
+        elif detail in ['nature', 'fori', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'active', 'cost']:
+        elif detail in ['nature', 'sns', 'family']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'active', 'busy']:
+        elif detail in ['nature', 'sns', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['nature', 'cost', 'busy']:
+        elif detail in ['nature', 'family', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'sleep']:
+        elif detail in ['culture', 'date', 'sleep']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'shopping']:
+        elif detail in ['culture', 'date', 'drive']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'kind']:
+        elif detail in ['culture', 'date', 'night']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'conv']:
+        elif detail in ['culture', 'date', 'fori']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'active']:
+        elif detail in ['culture', 'date', 'sns']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'cost']:
+        elif detail in ['culture', 'date', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'traffic', 'busy']:
+        elif detail in ['culture', 'date', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'sleep', 'shopping']:
+        elif detail in ['culture', 'sleep', 'drive']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'sleep', 'kind']:
+        elif detail in ['culture', 'sleep', 'night']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'sleep', 'conv']:
+        elif detail in ['culture', 'sleep', 'fori']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'sleep', 'active']:
+        elif detail in ['culture', 'sleep', 'sns']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'sleep', 'cost']:
+        elif detail in ['culture', 'sleep', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'sleep', 'busy']:
+        elif detail in ['culture', 'sleep', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'shopping', 'kind']:
+        elif detail in ['culture', 'drive', 'night']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'shopping', 'conv']:
+        elif detail in ['culture', 'drive', 'fori']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'shopping', 'active']:
+        elif detail in ['culture', 'drive', 'sns']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'shopping', 'cost']:
+        elif detail in ['culture', 'drive', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'shopping', 'busy']:
+        elif detail in ['culture', 'drive', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'kind', 'conv']:
+        elif detail in ['culture', 'night', 'fori']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'kind', 'active']:
+        elif detail in ['culture', 'night', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'kind', 'cost']:
+        elif detail in ['culture', 'night', 'family']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'kind', 'busy']:
+        elif detail in ['culture', 'night', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'conv', 'active']:
+        elif detail in ['culture', 'fori', 'sns']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'conv', 'cost']:
+        elif detail in ['culture', 'fori', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'conv', 'busy']:
+        elif detail in ['culture', 'fori', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'active', 'cost']:
+        elif detail in ['culture', 'sns', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'active', 'busy']:
+        elif detail in ['culture', 'sns', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['culture', 'cost', 'busy']:
+        elif detail in ['culture', 'family', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'sleep', 'shopping']:
+        elif detail in ['date', 'sleep', 'drive']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'sleep', 'kind']:
+        elif detail in ['date', 'sleep', 'night']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'sleep', 'conv']:
+        elif detail in ['date', 'sleep', 'fori']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'sleep', 'active']:
+        elif detail in ['date', 'sleep', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'sleep', 'cost']:
+        elif detail in ['date', 'sleep', 'family']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'sleep', 'busy']:
+        elif detail in ['date', 'sleep', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'shopping', 'kind']:
+        elif detail in ['date', 'drive', 'night']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'shopping', 'conv']:
+        elif detail in ['date', 'drive', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'shopping', 'active']:
+        elif detail in ['date', 'drive', 'sns']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'shopping', 'cost']:
+        elif detail in ['date', 'drive', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'shopping', 'busy']:
+        elif detail in ['date', 'drive', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'kind', 'conv']:
+        elif detail in ['date', 'night', 'fori']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'kind', 'active']:
+        elif detail in ['date', 'night', 'sns']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'kind', 'cost']:
+        elif detail in ['date', 'night', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'kind', 'busy']:
+        elif detail in ['date', 'night', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'conv', 'active']:
+        elif detail in ['date', 'fori', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'conv', 'cost']:
+        elif detail in ['date', 'fori', 'family']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'conv', 'busy']:
+        elif detail in ['date', 'fori', 'view']:
             result = cst3_list
             random.shuffle(result)
-        elif detail in ['traffic', 'active', 'cost']:
+        elif detail in ['date', 'sns', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'active', 'busy']:
+        elif detail in ['date', 'sns', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['traffic', 'cost', 'busy']:
+        elif detail in ['date', 'family', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'shopping', 'kind']:
+        elif detail in ['sleep', 'drive', 'night']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'shopping', 'conv']:
+        elif detail in ['sleep', 'drive', 'fori']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'shopping', 'active']:
+        elif detail in ['sleep', 'drive', 'sns']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'shopping', 'cost']:
+        elif detail in ['sleep', 'drive', 'family']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'shopping', 'busy']:
+        elif detail in ['sleep', 'drive', 'view']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'kind', 'conv']:
+        elif detail in ['sleep', 'night', 'fori']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'kind', 'active']:
+        elif detail in ['sleep', 'night', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'kind', 'cost']:
+        elif detail in ['sleep', 'night', 'family']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'kind', 'busy']:
+        elif detail in ['sleep', 'night', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'conv', 'active']:
+        elif detail in ['sleep', 'fori', 'sns']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'conv', 'cost']:
+        elif detail in ['sleep', 'fori', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'conv', 'busy']:
+        elif detail in ['sleep', 'fori', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'active', 'cost']:
+        elif detail in ['sleep', 'sns', 'family']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'active', 'busy']:
+        elif detail in ['sleep', 'sns', 'view']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['sleep', 'cost', 'busy']:
+        elif detail in ['sleep', 'family', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'kind', 'conv']:
+        elif detail in ['drive', 'night', 'fori']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'kind', 'active']:
+        elif detail in ['drive', 'night', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'kind', 'cost']:
+        elif detail in ['drive', 'night', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'kind', 'busy']:
+        elif detail in ['drive', 'night', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'active', 'cost']:
+        elif detail in ['drive', 'sns', 'family']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'active', 'busy']:
+        elif detail in ['drive', 'sns', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['shopping', 'cost', 'busy']:
+        elif detail in ['drive', 'family', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['kind', 'conv', 'active']:
+        elif detail in ['night', 'fori', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['kind', 'conv', 'cost']:
+        elif detail in ['night', 'fori', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['kind', 'conv', 'busy']:
+        elif detail in ['night', 'fori', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['kind', 'active', 'cost']:
+        elif detail in ['night', 'sns', 'family']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['kind', 'active', 'busy']:
+        elif detail in ['night', 'sns', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['kind', 'cost', 'busy']:
+        elif detail in ['night', 'family', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['conv', 'active', 'cost']:
+        elif detail in ['fori', 'sns', 'family']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['conv', 'active', 'busy']:
+        elif detail in ['fori', 'sns', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['conv', 'cost', 'busy']:
+        elif detail in ['fori', 'family', 'view']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['active', 'cost', 'busy']:
+        elif detail in ['sns', 'family', 'view']:
             result = cst2_list
             random.shuffle(result)
 

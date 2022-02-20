@@ -1,18 +1,16 @@
 from django.contrib import admin
-from .models import Citydata, AllCity, RefinedData, RepresentativeCluster, Product
+from .models import *
 # from .models import User
 
 # Register your models here.
 
-admin.site.register(Citydata)
 
-admin.site.register(AllCity)
+class HotelAdmin(admin.ModelAdmin):
+    list_display = ('index', 'locate', 'name', 'rating', 'review',
+                    'claafications', 'address', 'cost', 'url')
 
-admin.site.register(RefinedData)
 
-admin.site.register(RepresentativeCluster)
-
-admin.site.register(Product)
+admin.site.register(Hotel, HotelAdmin)
 
 # class UserAdmin(admin.ModelAdmin) :
 #     list_display = ('username', 'password')

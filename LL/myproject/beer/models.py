@@ -1,45 +1,4 @@
 from django.db import models
-from embed_video.fields import EmbedVideoField
-
-# Create your models here.
-
-
-# React for Django
-class Product(models.Model):
-    name = models.TextField()
-
-    def __str__(self):
-        return self.name
-
-
-class Post(models.Model): 
-    title = models.CharField(max_length=200) 
-    content = models.TextField() 
-    video = EmbedVideoField()
-
-
-class AllCity(models.Model):
-    index = models.IntegerField(primary_key=True)
-    nature = models.FloatField(blank=True, null=True)
-    culture = models.FloatField(blank=True, null=True)
-    traffic = models.FloatField(blank=True, null=True)
-    sleep = models.FloatField(blank=True, null=True)
-    food = models.FloatField(blank=True, null=True)
-    shopping = models.FloatField(blank=True, null=True)
-    inform = models.FloatField(blank=True, null=True)
-    conv = models.FloatField(blank=True, null=True)
-    kind = models.FloatField(blank=True, null=True)
-    activ = models.FloatField(blank=True, null=True)
-    cost = models.FloatField(blank=True, null=True)
-    busy = models.FloatField(blank=True, null=True)
-    avg = models.FloatField(blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-    cluster = models.IntegerField(db_column='Cluster', blank=True,
-                                  null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'all_city'
 
 
 class AuthGroup(models.Model):
@@ -108,15 +67,6 @@ class AuthUserUserPermissions(models.Model):
         unique_together = (('user', 'permission'), )
 
 
-class Citydata(models.Model):
-    index = models.IntegerField(primary_key=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'citydata'
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -164,59 +114,17 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class RefinedData(models.Model):
+class Hotel(models.Model):
     index = models.IntegerField(primary_key=True)
-    id = models.CharField(max_length=255, blank=True, null=True)
-    avg = models.FloatField(blank=True, null=True)
-    nature = models.FloatField(blank=True, null=True)
-    culture = models.FloatField(blank=True, null=True)
-    traffic = models.FloatField(blank=True, null=True)
-    sleep = models.FloatField(blank=True, null=True)
-    food = models.FloatField(blank=True, null=True)
-    shooping = models.FloatField(blank=True, null=True)
-    inform = models.FloatField(blank=True, null=True)
-    conv = models.FloatField(blank=True, null=True)
-    kind = models.FloatField(blank=True, null=True)
-    activ = models.FloatField(blank=True, null=True)
-    cost = models.FloatField(blank=True, null=True)
-    busy = models.FloatField(blank=True, null=True)
-    re = models.FloatField(blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
+    locate = models.TextField(blank=True, null=True)
+    name = models.TextField(blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    review = models.TextField(blank=True, null=True)
+    claafications = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    cost = models.TextField(blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'refined_data'
-
-
-class RepresentativeCluster(models.Model):
-    index = models.IntegerField(primary_key=True)
-    nature = models.FloatField(blank=True, null=True)
-    culture = models.FloatField(blank=True, null=True)
-    traffic = models.FloatField(blank=True, null=True)
-    sleep = models.FloatField(blank=True, null=True)
-    food = models.FloatField(blank=True, null=True)
-    shopping = models.FloatField(blank=True, null=True)
-    inform = models.FloatField(blank=True, null=True)
-    conv = models.FloatField(blank=True, null=True)
-    kind = models.FloatField(blank=True, null=True)
-    activ = models.FloatField(blank=True, null=True)
-    cost = models.FloatField(blank=True, null=True)
-    busy = models.FloatField(blank=True, null=True)
-    avg = models.FloatField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'representative_cluster'
-
-
-# class User(models.Model): #장고에서 제공하는 models.Model를 상속받아야한다.
-#     username = models.CharField(max_length=64,verbose_name = '사용자명')
-#     password = models.CharField(max_length=64,verbose_name = '비밀번호')
-#     registered_dttm = models.DateTimeField(auto_now_add=True,verbose_name='등록시간')
-#     #저장되는 시점의 시간을 자동으로 삽입해준다.
-
-#     def __str__(self): # 이 함수 추가
-#         return self.username  # User object 대신 나타낼 문자
-
-#     class Meta: #메타 클래스를 이용하여 테이블명 지정
-#         db_table = 'register'
+        db_table = 'hotel'

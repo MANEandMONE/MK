@@ -23,16 +23,12 @@ from rest_framework import routers
 from beer import views
 # from django.views.generic import ProductView
 
-router = routers.DefaultRouter()
-router.register('Product', views.ProductView, 'Product')
-
 # class HomeTemplateView(ProductView):
 #     template_name = 'index.html'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('beer.urls')),
-    path('api/', include(router.urls)),
     # path('', HomeTemplateView.as_view(), name='home'),
     # path('accounts/', include('accounts.urls'))
 ]
